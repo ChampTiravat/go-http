@@ -67,17 +67,17 @@ func (rPtr *Request) Submit() *Request {
 	return rPtr
 }
 
-func (rPtr *Request) Timeout(waitTime *time.Duration) *Request {
-	(*rPtr).TimeoutDuration = waitTime
+func (rPtr *Request) Timeout(waitTime time.Duration) *Request {
+	(*rPtr).TimeoutDuration = &waitTime
 	return rPtr
 }
 
-func (rPtr *Request) Retry(waitTime *time.Duration) *Request {
-	(*rPtr).RetryDuration = waitTime
+func (rPtr *Request) Retry(waitTime time.Duration) *Request {
+	(*rPtr).RetryDuration = &waitTime
 	return rPtr
 }
 
-func (rPtr *Request) BindJSON(destination *any) (int, error) {
+func (rPtr *Request) BindJSON(destination any) (int, error) {
 	return (*rPtr).Response.StatusCode, nil
 }
 
