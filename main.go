@@ -24,8 +24,8 @@ func CreateUser() (*User, error) {
 	)
 
 	statusCode, err := network.NewRequest().
-		Method(http.MethodPost).
 		URL(endpoint + "/users").
+		Method(http.MethodPost).
 		Headers(&network.Headers{
 			"Content-Type":    "application/json",
 			"x-access-token":  "<ACCESS_TOKEN>",
@@ -54,7 +54,7 @@ func CreateUser() (*User, error) {
 	case http.StatusUnauthorized:
 		err = errors.New("token not found")
 	default:
-		return errors.New("Something went wrong")
+		err = errors.New("Something went wrong")
 	}
 
 	return &user, err
@@ -64,8 +64,8 @@ func FetchUsers() (*[]User, error) {
 	var users []User
 
 	err := network.NewRequest().
-		Method(http.MethodGet).
 		URL(endpoint+"/users").
+		Method(http.MethodGet).
 		Header("Content-Type", "application/json").
 		Header("x-access-token", "<ACCESS_TOKEN>").
 		Header("x-refresh-token", "<REFRESH_TOKEN>").
@@ -83,8 +83,8 @@ func FetchSingleUser(userID string) (*User, error) {
 	var user User
 
 	err := network.NewRequest().
-		Method(http.MethodGet).
 		URL(endpoint+"/users/"+userID).
+		Method(http.MethodGet).
 		Header("Content-Type", "application/json").
 		Header("x-access-token", "<ACCESS_TOKEN>").
 		Header("x-refresh-token", "<REFRESH_TOKEN>").
